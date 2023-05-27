@@ -3,7 +3,6 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './users/user.entity';
-import { UsersService } from './users/users.service';
 import { UsersModule } from './users/users.module';
 import { ConfigModule } from '@nestjs/config';
 
@@ -25,7 +24,7 @@ import { ConfigModule } from '@nestjs/config';
     }),
     UsersModule,
   ],
-  // controllers: [AppController],
-  // providers: [AppService, UsersService],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}
