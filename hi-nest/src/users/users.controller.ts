@@ -27,21 +27,21 @@ export class UsersController {
     return this.usersService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id', ParseIntPipe) id: number): Promise<User> {
-    return this.usersService.findOne(id);
+  @Get(':userName')
+  findOne(@Param('userName') userName: string): Promise<User> {
+    return this.usersService.findOne(userName);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string): Promise<void> {
-    return this.usersService.remove(id);
+  @Delete(':userName')
+  remove(@Param('userName') userName: string): Promise<void> {
+    return this.usersService.remove(userName);
   }
 
-  @Patch(':id')
+  @Patch(':userName')
   update(
-    @Param('id') id: string,
+    @Param('userName') userName: string,
     @Body() updateData: UpdateUserDto,
   ): Promise<void> {
-    return this.usersService.update(id, updateData);
+    return this.usersService.update(userName, updateData);
   }
 }
