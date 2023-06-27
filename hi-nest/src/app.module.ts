@@ -6,6 +6,7 @@ import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { UserEntity } from './users/entities/user.entity';
+import { MailerModule } from '@nestjs-modules/mailer';
 
 @Module({
   imports: [
@@ -20,9 +21,24 @@ import { UserEntity } from './users/entities/user.entity';
       password: process.env.DB_PW,
       database: process.env.DB_NAME,
       entities: [UserEntity],
-      synchronize: true,
+      synchronize: false,
       autoLoadEntities: true,
       logging: true,
+    }),
+    MailerModule.forRootAsync({
+      useFactory: () => ({
+        transport: {
+          host: 'smtp.gmail.com',
+          port: 587,
+          auth: {
+            user: process.env.MAILER_USER,
+            pass: process.env.MAILER_PASS,
+          },
+        },
+        defaults: {
+          from: '"noreply" <gmail.com>',
+        },
+      }),
     }),
     AuthModule,
     UsersModule,
