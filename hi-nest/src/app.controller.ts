@@ -1,4 +1,4 @@
-import { Controller, Post, Body } from '@nestjs/common';
+import { Controller, Post, Body, Get } from '@nestjs/common';
 import { AppService } from './app.service';
 import { Public } from './auth/decorators/public.decorator';
 
@@ -10,5 +10,11 @@ export class AppController {
   @Post()
   async test(@Body() email: string) {
     return await this.appService.test(email);
+  }
+
+  @Public()
+  @Get()
+  async cTest() {
+    return await this.appService.cacheTest();
   }
 }
