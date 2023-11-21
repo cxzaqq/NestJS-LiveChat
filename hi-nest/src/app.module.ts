@@ -7,7 +7,7 @@ import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { UserEntity } from './users/entities/user.entity';
 import { MailerModule } from '@nestjs-modules/mailer';
-import { CacheModule } from '@nestjs/cache-manager';
+import { RedisModule } from './redis/redis.module';
 
 @Module({
   imports: [
@@ -43,10 +43,7 @@ import { CacheModule } from '@nestjs/cache-manager';
     }),
     AuthModule,
     UsersModule,
-    CacheModule.register({
-      ttl: 3000, //milliseconds
-      max: 3,
-    }),
+    RedisModule,
   ],
   controllers: [AppController],
   providers: [AppService],

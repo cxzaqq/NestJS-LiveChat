@@ -11,10 +11,4 @@ export class AppController {
   async test(@Body() email: string) {
     return await this.appService.test(email);
   }
-
-  @Public()
-  @Get()
-  async cTest() {
-    return await this.appService.cacheTest();
-  }
 }
