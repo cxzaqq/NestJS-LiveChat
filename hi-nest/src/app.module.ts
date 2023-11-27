@@ -8,6 +8,7 @@ import { UsersModule } from './users/users.module';
 import { UserEntity } from './users/entities/user.entity';
 import { MailerModule } from '@nestjs-modules/mailer';
 import { RedisModule } from './redis/redis.module';
+import { ScheduleModule } from '@nestjs/schedule';
 
 @Module({
   imports: [
@@ -41,6 +42,7 @@ import { RedisModule } from './redis/redis.module';
         },
       }),
     }),
+    ScheduleModule.forRoot(),
     AuthModule,
     UsersModule,
     RedisModule,

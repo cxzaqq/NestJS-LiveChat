@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { MailerService } from '@nestjs-modules/mailer';
+import { Cron, CronExpression } from '@nestjs/schedule/dist';
 
 @Injectable()
 export class AppService {
@@ -24,5 +25,10 @@ export class AppService {
         console.log(error);
       });
     return true;
+  }
+
+  @Cron(CronExpression.EVERY_10_SECONDS)
+  handleCron() {
+    console.log('called every 10 seconds');
   }
 }
