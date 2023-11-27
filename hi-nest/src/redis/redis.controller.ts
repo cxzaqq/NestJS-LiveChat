@@ -9,9 +9,11 @@ export class RedisController {
   @Public()
   @Get()
   async get() {
+    await this.redisService.set('key', '{"id": 1, "title": "hi"}');
     const key = 'key';
     const value = await this.redisService.get(key);
     console.log(value);
+    console.log(JSON.parse(value));
     return value;
   }
 }
