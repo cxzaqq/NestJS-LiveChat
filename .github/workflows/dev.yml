@@ -19,11 +19,11 @@ jobs:
         key: ${{ secrets.EC2_SSH_KEY }}
         script: |
           cd /home/ubuntu/NestJS-LiveChat
-          git pull origin main
-          pm2 kill
+          sudo git pull origin main
+          sudo pm2 kill
           cd live-chat
-          npm i
-          npm run build
-          npx prisma generate
-          pm2 start dist/main.js
+          sudo npm i
+          sudo npm run build
+          sudo npx prisma generate
+          sudo pm2 start dist/main.js
 
