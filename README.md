@@ -1,1 +1,7 @@
-# NestJS 공부
+# NestJS-LiveChat
+
+NestJS
+Prisma
+MongoDB
+Socket.io
+AWS
