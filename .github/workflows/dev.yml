@@ -7,21 +7,10 @@ on:
 
 jobs:
   deploy:
+    name: deploy
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
-
-    - name: Copy files via SSH
-      uses: appleboy/scp-action@v0.1.5
-      with:
-        host: ${{ secrets.EC2_HOST }}
-        username: ubuntu
-        key: ${{ secrets.EC2_SSH_KEY }}
-        source: "./"
-        target: "/home/ubuntu/app"
-
     - name: Execute SSH command
       uses: appleboy/ssh-action@v0.1.6
       with:
