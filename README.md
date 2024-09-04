@@ -1,7 +1,7 @@
 # NestJS-LiveChat
 
-NestJS
-Prisma
-MongoDB
-Socket.io
-AWS
+NestJS<br/>
+Prisma<br/>
+MongoDB<br/>
+Socket.io<br/>
+AWS<br/>
