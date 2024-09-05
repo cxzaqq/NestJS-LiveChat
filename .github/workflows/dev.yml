@@ -6,9 +6,29 @@ on:
       - main
 
 jobs:
-  deploy:
-    name: deploy
+  test:
+    name: Run Tests
     runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '16'
+
+    - name: Install dependencies
+      run: sudo npm install
+
+    - name: Run tests
+      run: sudo npm test
+
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    needs: test  # 'test' 작업이 성공적으로 완료된 경우에만 이 작업을 실행합니다.
 
     steps:
     - name: Execute SSH command
@@ -25,4 +45,3 @@ jobs:
           sudo npm run build
           sudo npx prisma generate
           sudo pm2 start dist/main.js
-
