@@ -21,7 +21,6 @@ jobs:
           cd /home/ubuntu/NestJS-LiveChat
           sudo git pull origin main
           sudo pm2 kill
-          cd live-chat
           sudo npm i
           sudo npm run build
           sudo npx prisma generate
