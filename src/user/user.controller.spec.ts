@@ -9,17 +9,17 @@ describe('UserController', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [UserController],
-      // providers: [
-      //   UserService,
-      //   {
-      //     provide: PrismaService,
-      //     useValue: {
-      //       user: {
-      //         findUnique: jest.fn(),
-      //       },
-      //     },
-      //   },
-      // ],
+      providers: [
+        UserService,
+        {
+          provide: PrismaService,
+          useValue: {
+            user: {
+              findUnique: jest.fn(),
+            },
+          },
+        },
+      ],
     }).compile();
 
     controller = module.get<UserController>(UserController);
