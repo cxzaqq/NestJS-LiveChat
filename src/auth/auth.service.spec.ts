@@ -23,6 +23,7 @@ describe('AuthService', () => {
           provide: JwtService,
           useValue: {
             signAsync: jest.fn(),
+            verifyAsync: jest.fn(),
           },
         },
       ],
@@ -48,33 +49,35 @@ describe('AuthService', () => {
     expect(jwtService).toBeDefined();
   });
 
-  it('should throw an error if user is not found', async () => {
-    jest.spyOn(userService, 'findOne').mockResolvedValue(null);
+  describe('signIn', () => {
+    it('should throw an error if user is not found', async () => {
+      jest.spyOn(userService, 'findOne').mockResolvedValue(null);
 
-    await expect(
-      authService.signIn('invalidUserId', 'password'),
-    ).rejects.toThrow(new UnauthorizedException('user not found'));
-  });
+      await expect(
+        authService.signIn('invalidUserId', 'password'),
+      ).rejects.toThrow(new UnauthorizedException('user not found'));
+    });
 
-  it('should throw an error if password is incorrect', async () => {
-    jest.spyOn(userService, 'findOne').mockResolvedValue(mockUser);
+    it('should throw an error if password is incorrect', async () => {
+      jest.spyOn(userService, 'findOne').mockResolvedValue(mockUser);
 
-    await expect(
-      authService.signIn('validUserId', 'wrongPassword'),
-    ).rejects.toThrow(new UnauthorizedException('Invalid password'));
-  });
+      await expect(
+        authService.signIn('validUserId', 'wrongPassword'),
+      ).rejects.toThrow(new UnauthorizedException('Invalid password'));
+    });
 
-  it('should return an JWT token if credentails are valid', async () => {
-    const mockToken = 'mockJwtToken';
+    it('should return an JWT token if credentails are valid', async () => {
+      const mockToken = 'mockJwtToken';
 
-    jest.spyOn(userService, 'findOne').mockResolvedValue(mockUser);
-    jest.spyOn(jwtService, 'signAsync').mockResolvedValue(mockToken);
+      jest.spyOn(userService, 'findOne').mockResolvedValue(mockUser);
+      jest.spyOn(jwtService, 'signAsync').mockResolvedValue(mockToken);
 
-    const result = await authService.signIn('validUserId', 'correctPassword');
+      const result = await authService.signIn('validUserId', 'correctPassword');
 
-    expect(result).toEqual({
-      access_token: mockToken,
-      statusCode: 200,
+      expect(result).toEqual({
+        access_token: mockToken,
+        statusCode: 200,
+      });
     });
   });
 });
