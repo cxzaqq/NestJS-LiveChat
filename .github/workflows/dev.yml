@@ -40,8 +40,8 @@ jobs:
         script: |
           cd /home/ubuntu/NestJS-LiveChat
           sudo git pull origin main
-          sudo pm2 kill
           sudo npm i
           sudo npm run build
           sudo npx prisma generate
+          sudo pm2 kill
           sudo pm2 start dist/main.js
